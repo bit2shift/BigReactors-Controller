@@ -1,3 +1,5 @@
+-- vim: syntax=lua
+
 local monitor = peripheral.wrap("left")
 local reactor = peripheral.wrap("BigReactors-Reactor_0")
 local turbine = peripheral.wrap("BigReactors-Turbine_0")
