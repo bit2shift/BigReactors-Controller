@@ -1,0 +1,81 @@
+local monitor = peripheral.wrap("left")
+local reactor = peripheral.wrap("BigReactors-Reactor_0")
+local turbine = peripheral.wrap("BigReactors-Turbine_0")
+
+function reset()
+  reactor.setAllControlRodLevels(100)
+  turbine.setInductorEngaged(false)
+end
+
+function hysteresis(a, b)
+  local flag = false
+  return function(val)
+    flag = flag or (val <= a)
+    flag = flag and (val < b)
+    return flag
+  end
+end
+
+function tick()
+  sleep(0.2)
+end
+
+function power()
+  local state = hysteresis(1e5, 9e5)
+  while true do
+    turbine.setInductorEngaged(state(turbine.getEnergyStored()))
+    tick()
+  end
+end
+
+function speed()
+  local state = hysteresis(1750, 1850)
+  while true do
+    reactor.setActive(state(turbine.getRotorSpeed()))
+    tick()
+  end
+end
+
+function temperature()
+  local delay = 0
+  local state = hysteresis(100, 120)
+  while true do
+    if reactor.getActive() and state(reactor.getCasingTemperature()) then
+      delay = delay % 40 + 1
+      if delay == 40 then
+        reactor.setAllControlRodLevels(reactor.getControlRodLevel(0) - 1)
+      end
+    end
+    tick()
+  end
+end
+
+function refill()
+  while reactor.getFuelAmount() > 1e3 do
+    tick()
+  end
+  print("Refill and reboot")
+end
+
+function status()
+  local past = 0
+  while true do
+    local present = turbine.getEnergyStored()
+    print((present - past) / 20)
+    past = present
+    sleep(1)
+  end
+end
+
+monitor.setTextScale(2.0)
+local screen = term.redirect(monitor)
+
+term.clear()
+term.setCursorPos(1, 1)
+
+reset()
+parallel.waitForAny(power, speed, temperature, refill, status)
+reset()
+
+term.redirect(screen)
+--EOF--
