@@ -12,4 +12,5 @@ A shut-off mechanism is set to trigger when the fuel level is less or equal than
 When triggered, the turbine inductor is disengaged and all control rod levels are set to 100%.  
 This reset procedure also occurs when the script begins execution.
 
-As a precaution, the max flow rate on the turbine should be set to less than 1000 mB/t.
+As a precaution, the max flow rate on the turbine should be set to less than 1000 mB/t.  
+Manual refuelling during active operation is discouraged.
