@@ -11,3 +11,5 @@ The following hysteresis values are hardcoded for optimal performance:
 A shut-off mechanism is set to trigger when the fuel level is less or equal than 1000 mB.  
 When triggered, the turbine inductor is disengaged and all control rod levels are set to 100%.  
 This reset procedure also occurs when the script begins execution.
+
+As a precaution, the max flow rate on the turbine should be set to less than 1000 mB/t.
