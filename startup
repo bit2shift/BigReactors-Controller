@@ -76,4 +76,3 @@ parallel.waitForAny(power, speed, temperature, refill, status)
 reset()
 
 term.redirect(screen)
---EOF--
