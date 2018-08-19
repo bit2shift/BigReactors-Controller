@@ -35,16 +35,15 @@ function speed()
 end
 
 function temperature()
-  local delay = 0
-  local state = hysteresis(100, 120)
+  local dec = hysteresis(100, 120)
+  local inc = hysteresis(-130, -120)
+  local num = {[false] = 0, [true] = 1}
   while true do
-    if reactor.getActive() and state(reactor.getCasingTemperature()) then
-      delay = delay % 40 + 1
-      if delay == 40 then
-        reactor.setAllControlRodLevels(reactor.getControlRodLevel(0) - 1)
-      end
+    if reactor.getActive() then
+      local temp = reactor.getCasingTemperature()
+      reactor.setAllControlRodLevels(reactor.getControlRodLevel(0) - num[dec(temp)] + num[inc(-temp)])
     end
-    sleep(0.2)
+    sleep(8)
   end
 end
 

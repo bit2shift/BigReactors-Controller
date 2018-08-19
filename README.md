@@ -13,4 +13,4 @@ When triggered, the turbine inductor is disengaged and all control rod levels ar
 This reset procedure also occurs when the script begins execution.
 
 As a precaution, the max flow rate on the turbine should be set to less than 1000 mB/t.  
-Manual refuelling during active operation is discouraged.
+Manual refuelling during active operation is discouraged, but the controller can compensate by lowering the rods if the casing temperature goes greatly above the upper bound.
