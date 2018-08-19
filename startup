@@ -49,8 +49,8 @@ function temperature()
 end
 
 function refill()
-  while reactor.getFuelAmount() > 1e3 do
-    sleep(0.2)
+  while reactor.getFuelAmount() > 4e3 do
+    sleep(1)
   end
   print("Refill and reboot")
 end
