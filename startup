@@ -35,7 +35,7 @@ function speed()
 end
 
 function temperature()
-  local dec = hysteresis(100, 120)
+  local dec = hysteresis(110, 120)
   local inc = hysteresis(-130, -120)
   local num = {[false] = 0, [true] = 1}
   while true do
@@ -43,7 +43,7 @@ function temperature()
       local temp = reactor.getCasingTemperature()
       reactor.setAllControlRodLevels(reactor.getControlRodLevel(0) - num[dec(temp)] + num[inc(-temp)])
     end
-    sleep(8)
+    sleep(4)
   end
 end
 

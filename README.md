@@ -6,7 +6,7 @@ It provides minimal status reporting to a connected monitor (turbine energy buff
 The following hysteresis values are hardcoded for optimal performance:
 - turbine inductor [turbine energy buffer capacity]: on = 10%, off = 90%
 - reactor state [turbine rotor speed]: on = 1750 RPM, off = 1850 RPM
-- control rod raising [reactor casing temperature]: begin = 100ºC, end = 120ºC
+- control rod raising [reactor casing temperature]: begin = 110 ºC, end = 120 ºC
 
 A shut-off mechanism is set to trigger when the fuel level is less or equal than 4000 mB.  
 When triggered, the turbine inductor is disengaged and all control rod levels are set to 100%.  
