@@ -18,15 +18,11 @@ function hysteresis(a, b)
   end
 end
 
-function tick()
-  sleep(0.2)
-end
-
 function power()
   local state = hysteresis(1e5, 9e5)
   while true do
     turbine.setInductorEngaged(state(turbine.getEnergyStored()))
-    tick()
+    sleep(0.2)
   end
 end
 
@@ -34,7 +30,7 @@ function speed()
   local state = hysteresis(1750, 1850)
   while true do
     reactor.setActive(state(turbine.getRotorSpeed()))
-    tick()
+    sleep(0.2)
   end
 end
 
@@ -48,13 +44,13 @@ function temperature()
         reactor.setAllControlRodLevels(reactor.getControlRodLevel(0) - 1)
       end
     end
-    tick()
+    sleep(0.2)
   end
 end
 
 function refill()
   while reactor.getFuelAmount() > 1e3 do
-    tick()
+    sleep(0.2)
   end
   print("Refill and reboot")
 end
